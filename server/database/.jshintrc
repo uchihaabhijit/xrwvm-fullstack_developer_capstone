@@ -8,7 +8,7 @@
       "jQuery": true
     },
     "predef": ["-Promise"],
-    "strict": "global",
+    "strict": "false",
     "eqeqeq": true,
     "curly": true
   }
