@@ -30,8 +30,6 @@ const Dealers = () => {
     const res = await fetch(dealer_url, {
       method: "GET"
     });
-
-    console.log(res);
     const retobj = await res.json();
     if(retobj.status === 200) {
       let all_dealers = Array.from(retobj.dealers)
@@ -39,7 +37,6 @@ const Dealers = () => {
       all_dealers.forEach((dealer)=>{
         states.push(dealer.state)
       });
-
 
       setStates(Array.from(new Set(states)))
       setDealersList(all_dealers)
