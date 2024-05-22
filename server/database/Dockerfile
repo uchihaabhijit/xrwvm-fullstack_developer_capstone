@@ -1,5 +1,6 @@
 FROM node:18.12.1-bullseye-slim
-
+RUN npm config set registry http://registry.npmjs.org/ 
+RUN npm config set strict-ssl false
 RUN npm install -g npm@9.1.3
 
 ADD package.json .
@@ -9,6 +10,8 @@ ADD dealership.js .
 ADD data/dealerships.json .
 ADD data/reviews.json .
 COPY . .
+RUN npm config set registry http://registry.npmjs.org/ 
+RUN npm config set strict-ssl false
 RUN npm install
 
 EXPOSE 3030
