@@ -20,23 +20,10 @@ spec:
         run: dealership
     spec:
       containers:
-        - image: us.icr.io/sn-labs-borkakot/dealership:latest
-          imagePullPolicy: Always
-          name: dealership
-          ports:
-            - containerPort: 8000
-              protocol: TCP
+      - image: us.icr.io/your-name-space/dealership:latest
+        imagePullPolicy: Always
+        name: dealership
+        ports:
+        - containerPort: 8000
+          protocol: TCP
       restartPolicy: Always
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: dealership-service
-spec:
-  type: LoadBalancer
-  ports:
-    - port: 8000
-      targetPort: 8000
-      protocol: TCP
-  selector:
-    run: dealership

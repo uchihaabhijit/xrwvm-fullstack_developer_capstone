@@ -1,60 +1,57 @@
-# Uncomment the following imports before adding the Model code
-
+# Standard library imports 
 from django.db import models
-from django.utils.timezone import now
+from django.utils.timezone import now  
 from django.core.validators import MaxValueValidator, MinValueValidator
 
+# Local app imports
+
+
+# Registering models with their respective admins
 
 # Create your models here.
+
+# CarMake model
+
 class CarMake(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=100)
     description = models.TextField()
+    # Other fields as needed
 
     def __str__(self):
-        return self.name
+        return self.name  # Return the name as the string representation
 
+# class CarMake(models.Model):
+#     name = models.CharField(max_length=100)
+#     description = models.TextField()
+
+#     def __str__(self):
+#         return self.name
 
 class CarModel(models.Model):
-    car_make = models.ForeignKey(CarMake, on_delete=models.CASCADE)
+    car_make = models.ForeignKey(CarMake, on_delete=models.CASCADE)  # Many-to-One relationship
     name = models.CharField(max_length=100)
-    SEDAN = "Sedan"
-    SUV = "SUV"
-    WAGON = "Wagon"
-    COMPACT = "Compact"
-    SPORTS = "Sports"
-    CAR_TYPE_CHOICES = [
-        (SEDAN, "Sedan"),
-        (SUV, "SUV"),
-        (WAGON, "Wagon"),
-        (COMPACT, "Compact"),
-        (SPORTS, "Sports"),
+    CAR_TYPES = [
+        ('SEDAN', 'Sedan'),
+        ('SUV', 'SUV'),
+        ('WAGON', 'Wagon'),
+        # Add more choices as required
     ]
-    car_type = models.CharField(
-        max_length=7,
-        choices=CAR_TYPE_CHOICES,
-        default=SEDAN,
-    )
-    year = models.IntegerField(
-        default=2024, validators=[MinValueValidator(2015), MaxValueValidator(2023)]
-    )
+    type = models.CharField(max_length=10, choices=CAR_TYPES, default='SUV')
+    year = models.IntegerField(default=2023,
+        validators=[
+            MaxValueValidator(2023),
+            MinValueValidator(2015)
+        ])
+    # Other fields as needed
 
     def __str__(self):
-        return self.name
+        return self.name  # Return the name as the string representation
 
+class Dealership(models.Model):
+    name = models.CharField(max_length=100)
+    address = models.CharField(max_length=200)
 
-# <HINT> Create a Car Make model `class CarMake(models.Model)`:
-# - Name
-# - Description
-# - Any other fields you would like to include in car make model
-# - __str__ method to print a car make object
-
-
-# <HINT> Create a Car Model model `class CarModel(models.Model):`:
-# - Many-To-One relationship to Car Make model (One Car Make has many
-# Car Models, using ForeignKey field)
-# - Name
-# - Type (CharField with a choices argument to provide limited choices
-# such as Sedan, SUV, WAGON, etc.)
-# - Year (IntegerField) with min value 2015 and max value 2023
-# - Any other fields you would like to include in car model
-# - __str__ method to print a car make object
+class Review(models.Model):
+    dealer = models.ForeignKey(Dealership, on_delete=models.CASCADE)
+    text = models.TextField()
+    rating = models.IntegerField()
