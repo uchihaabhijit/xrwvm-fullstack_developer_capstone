@@ -1,4 +1,6 @@
-from django.shortcuts import render
+# Remove unused import
+# from django.shortcuts import render
+
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import logout, login, authenticate
@@ -14,6 +16,7 @@ logger = logging.getLogger(__name__)
 
 # Create your views here.
 
+# Add blank lines after the imports
 # Create a `login_request` view to handle sign in request
 @csrf_exempt
 def login_user(request):
@@ -30,6 +33,7 @@ def login_user(request):
         data = {"userName": username, "status": "Authenticated"}
     return JsonResponse(data)
 
+# Add blank lines after each view function
 # Create a `logout_request` view to handle sign out request
 def logout_request(request):
     logout(request)
