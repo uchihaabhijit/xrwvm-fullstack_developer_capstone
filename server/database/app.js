@@ -112,7 +112,6 @@ app.get('/fetchDealer/:id', async (req, res) => {
   });
   
 //Express route to insert review
-/* global data */
 app.post('/insert_review', express.raw({ type: '*/*' }), async (req, res) => {
   let data = JSON.parse(req.body);
   const documents = await Reviews.find().sort( { id: -1 } );
