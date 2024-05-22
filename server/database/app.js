@@ -7,6 +7,7 @@ const  cors = require('cors');
 
 const app = express();
 const port = 3030;
+Response res = null;
 
 app.use(cors());
 app.use(require('body-parser').urlencoded({ extended: false }));
@@ -40,11 +41,13 @@ try {
 
 
 // Express route to home
+/* global res */
 app.get('/', async (req, res) => {
     res.send("Welcome to the Mongoose API");
 });
 
 // Express route to fetch all reviews
+/* global res */
 app.get('/fetchReviews', async (req, res) => {
   try {
     const documents = await Reviews.find();
@@ -110,6 +113,7 @@ app.get('/fetchDealer/:id', async (req, res) => {
   });
   
 //Express route to insert review
+/* global data */
 app.post('/insert_review', express.raw({ type: '*/*' }), async (req, res) => {
   data = JSON.parse(req.body);
   const documents = await Reviews.find().sort( { id: -1 } );
