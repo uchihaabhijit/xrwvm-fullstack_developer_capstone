@@ -1,0 +1,15 @@
+{
+    "esversion": 6,
+    "node": true,
+    "browser": true,
+    "undef": true,
+    "unused": true,
+    "globals": {
+      "jQuery": true
+    },
+    "predef": ["-Promise"],
+    "strict": "global",
+    "eqeqeq": true,
+    "curly": true
+  }
+  
